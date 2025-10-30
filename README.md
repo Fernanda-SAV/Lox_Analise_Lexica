@@ -55,9 +55,7 @@ Trabalho submetido à disciplina de Compiladores - Lox: Análise Léxica
        ├── Lox.java          → Classe principal do interpretador (REPL e execução de arquivo)
        ├── Scanner.java      → Scanner que percorre o código-fonte e gera tokens
        ├── Token.java        → Classe de representação dos tokens
-       ├── TokenType.java    → Enum com todos os tipos possíveis de tokens
-       └── Parser.java
-       └── Interpreter.java
+       └── TokenType.java    → Enum com todos os tipos possíveis de tokens
 
 ```
 ---
