@@ -81,7 +81,7 @@ Agradecemos a todas as pessoas e instituições que contribuíram para a realiza
 
 ## Materiais de Apoio para o Projeto
 
-- [Link para material usado como referência de exercícios e exemplos](https://profsergiocosta.notion.site/Tradu-o-dirigida-por-sintaxe-bc590c67d8234f81bee5cfdb505f2dd1)
+- [Link para material usado como referência de exercícios e exemplos](https://craftinginterpreters.com/scanning.html#the-interpreter-framework)
 
 ---
 
