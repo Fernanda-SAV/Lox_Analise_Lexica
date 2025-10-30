@@ -61,6 +61,7 @@ Trabalho submetido à disciplina de Compiladores - Lox: Análise Léxica
 
 ---
 
+```
 ## Autora
 
 - [Fernanda Sousa de Assunção Vale](fernanda.sav@discente.ufma.br) -> GitHub:[Fernanda-SAV](https://github.com/Fernanda-SAV) 
