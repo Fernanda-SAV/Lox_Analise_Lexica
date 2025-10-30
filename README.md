@@ -59,13 +59,12 @@ Trabalho submetido à disciplina de Compiladores - Lox: Análise Léxica
        └── Parser.java
        └── Interpreter.java
 
----
-
 ```
+---
 ## Autora
 
 - [Fernanda Sousa de Assunção Vale](fernanda.sav@discente.ufma.br) -> GitHub:[Fernanda-SAV](https://github.com/Fernanda-SAV) 
-- [Izadora de Paula Santos Lima](izadora.paula@discente.ufma.br) -> Github:[]
+- [Izadora de Paula Santos Lima](izadora.paula@discente.ufma.br) -> Github:[izadora-paula](https://github.com/izadora-paula)
 
 ---
 
