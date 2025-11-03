@@ -1,11 +1,11 @@
-package com.craftinginterpreters.lox;
+//package com.craftinginterpreters.lox;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.craftinginterpreters.lox.TokenType.*;
+//import static com.craftinginterpreters.lox.TokenType.*;
 
 class Scanner {
     private final String source;
@@ -79,19 +79,39 @@ class Scanner {
             case '"':
                 string();
                 break;
-
+            case 'o':
+                if (match('r')) {
+                    addToken(OR);
+                }
+                break;
             default:
                 if (isDigit(c)) {
                     number();
-                } else {
+                } else if (isAlpha(c)) {
+                    identifier();
+                }
+                else {
                     Lox.error(line, "Unexpected character.");
                 }
                 break;
         }
     }
+    private void identifier() {
+        while (isAlphaNumeric(peek())) advance();
 
+        addToken(IDENTIFIER);
+    }
     private boolean isAtEnd() {
         return current >= source.length();
+    }
+    private boolean isAlpha(char c) {
+        return (c >= 'a' && c <= 'z') ||
+                (c >= 'A' && c <= 'Z') ||
+                c == '_';
+    }
+
+    private boolean isAlphaNumeric(char c) {
+        return isAlpha(c) || isDigit(c);
     }
 
     private char advance() {
