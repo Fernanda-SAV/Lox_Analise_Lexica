@@ -12,10 +12,12 @@ Trabalho submetido à disciplina de Compiladores - Lox: Análise Léxica
 
 ## Resumo do Trabalho
 
-> Este projeto apresenta a implementação inicial de um interpretador em Java baseado na linguagem Lox, conforme o livro Crafting Interpreters de Robert Nystrom. 
+> Este projeto apresenta a implementação de um interpretador em Java baseado na linguagem Lox, conforme o livro Crafting Interpreters de Robert Nystrom. 
 > O trabalho consiste na construção do scanner (analisador léxico), responsável por ler o código-fonte e convertê-lo em uma sequência de tokens (as menores unidades significativas de um programa). 
 > Além disso, foi estruturada a classe principal do interpretador (Lox.java), com suporte para execução via arquivo e em modo interativo (REPL), e um sistema básico de tratamento de erros. 
 > O objetivo é demonstrar os fundamentos do processo de tradução dirigida por sintaxe e a importância da análise léxica no fluxo de compilação e interpretação de linguagens.
+> Este projeto dá continuidade à implementação do interpretador em Java da linguagem Lox. O foco desta etapa é a representação de código, com a construção da árvore sintática abstrata (AST), permitindo organizar e manipular expressões de forma estruturada.
+> Essa fase estabelece a base para a análise sintática e interpretação de expressões, mantendo a modularidade do projeto.
 
 ## Descrição
 > O sistema foi dividido em **módulos principais**, que juntos implementam a primeira etapa de um interpretador funcional:
@@ -46,16 +48,33 @@ Trabalho submetido à disciplina de Compiladores - Lox: Análise Léxica
 - Usa o método `error(line, message)` para exibir erros de sintaxe e interromper a execução quando necessário.
 - Mantém o controle de estado por meio da variável estática `hadError`.
 
+### **5. Classe Expr.java**
+- Representa a hierarquia de expressões da linguagem Lox;
+- Cada tipo de expressão (literal, binária, unária, agrupamento) é definido como uma classe interna;
+- Implementa o padrão Visitor para permitir operações sobre a AST sem alterar suas classes.
+
+### **6. Gerador de AST - GenerateAst.java**
+- Script para gerar automaticamente o arquivo Expr.java;
+- Define os tipos de expressões e gera as classes e interface Visitor correspondentes.
+
+### **7. Impressão de AST - AstPrinter.java**
+- Visitor que percorre a AST e gera uma representação textual;
+- Facilita depuração e verificação da estrutura das expressões.
+
 ---
 ## Estrutura do Repositório
 
 ```plaintext
 /src
 └── lox
-       ├── Lox.java          → Classe principal do interpretador (REPL e execução de arquivo)
-       ├── Scanner.java      → Scanner que percorre o código-fonte e gera tokens
-       ├── Token.java        → Classe de representação dos tokens
-       └── TokenType.java    → Enum com todos os tipos possíveis de tokens
+       ├── Lox.java              → Classe principal do interpretador (REPL e execução de arquivo)
+       ├── Scanner.java          → Scanner que percorre o código-fonte e gera tokens
+       ├── Token.java            → Classe de representação dos tokens
+       ├── TokenType.java        → Enum com todos os tipos possíveis de tokens
+       ├── Expr.java             → Classes da AST (geradas pelo GenerateAst.java)
+       ├── AstPrinter.java       → Visitor para exibir a AST
+└── tool
+       └── GenerateAst.java      → Gerador de código da AST
 
 ```
 ---
