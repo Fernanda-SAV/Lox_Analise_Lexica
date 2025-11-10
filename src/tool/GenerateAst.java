@@ -73,6 +73,8 @@ public class GenerateAst {
             writer.println("      this." + name + " = " + name + ";");
         }
 
+        writer.println("}");
+
         // Visitor pattern.
         writer.println();
         writer.println("    @Override");
