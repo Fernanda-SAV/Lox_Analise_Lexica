@@ -12,12 +12,27 @@ Trabalho submetido à disciplina de Compiladores - Lox: Análise Léxica
 
 ## Resumo do Trabalho
 
-> Este projeto apresenta a implementação de um interpretador em Java baseado na linguagem Lox, conforme o livro Crafting Interpreters de Robert Nystrom. 
-> O trabalho consiste na construção do scanner (analisador léxico), responsável por ler o código-fonte e convertê-lo em uma sequência de tokens (as menores unidades significativas de um programa). 
-> Além disso, foi estruturada a classe principal do interpretador (Lox.java), com suporte para execução via arquivo e em modo interativo (REPL), e um sistema básico de tratamento de erros. 
-> O objetivo é demonstrar os fundamentos do processo de tradução dirigida por sintaxe e a importância da análise léxica no fluxo de compilação e interpretação de linguagens.
-> Este projeto dá continuidade à implementação do interpretador em Java da linguagem Lox. O foco desta etapa é a representação de código, com a construção da árvore sintática abstrata (AST), permitindo organizar e manipular expressões de forma estruturada.
-> Essa fase estabelece a base para a análise sintática e interpretação de expressões, mantendo a modularidade do projeto.
+Este repositório contém a implementação da primeira e segunda etapa do interpretador da linguagem Lox, conforme o livro Crafting Interpreters, de Robert Nystrom.
+- O foco atual do projeto é:
+> - Análise Léxica (Scanner) — converter o código-fonte em tokens. 
+> - Representação de Expressões (AST) — estruturar o código como uma Árvore Sintática Abstrata. 
+> - Ferramentas internas como gerador de AST e impressor da árvore. 
+
+Este projeto introduz conceitos fundamentais de compiladores e linguagens formais, incluindo:
+> - tradução dirigida por sintaxe, 
+> - hierarquias de tokens, 
+> - padrões de projeto (Visitor), 
+> - manipulação de árvores sintáticas, 
+> - design modular de interpretadores.
+
+## Propósito do Projeto
+
+> O objetivo desta implementação é:
+> - Compreender e demonstrar o processo de análise léxica, a primeira fase de qualquer compilador ou interpretador. 
+> - Construir estruturas internas capazes de representar expressões, operadores, agrupamentos e literais. 
+> - Estabelecer a fundação para a próxima etapa: análise sintática (parser) e posteriormente o avaliador (interpreter).
+
+O projeto é totalmente educacional e segue rigorosamente a metodologia apresentada no livro.
 
 ## Descrição
 > O sistema foi dividido em **módulos principais**, que juntos implementam a primeira etapa de um interpretador funcional:
@@ -65,18 +80,50 @@ Trabalho submetido à disciplina de Compiladores - Lox: Análise Léxica
 ## Estrutura do Repositório
 
 ```plaintext
-/src
-└── lox
-       ├── Lox.java              → Classe principal do interpretador (REPL e execução de arquivo)
-       ├── Scanner.java          → Scanner que percorre o código-fonte e gera tokens
-       ├── Token.java            → Classe de representação dos tokens
-       ├── TokenType.java        → Enum com todos os tipos possíveis de tokens
-       ├── Expr.java             → Classes da AST (geradas pelo GenerateAst.java)
-       ├── AstPrinter.java       → Visitor para exibir a AST
-└── tool
-       └── GenerateAst.java      → Gerador de código da AST
-
+src/
+ ├── main/
+ │   └── java/
+ │       ├── Lox.java
+ │       ├── Scanner.java
+ │       ├── Parser.java
+ │       ├── Token.java
+ │       ├── TokenType.java
+ │       ├── Expr.java
+ │       ├── AstPrinter.java
+ │       └── GenerateAst.java
+ └── test/
+     └── java/   (opcional)
+pom.xml
 ```
+---
+## Como compilar o projeto
+- Para compilar e executar este projeto na sua máquina, você precisará instalar:
+> - JDK 17 ou superior;
+> - Apache Maven (versão 3.9 ou superior);
+
+- Abra o terminal/cmd na pasta onde está o pom.xml e execute:
+> - mvn clean package
+- Isso irá:
+> - limpar arquivos antigos; 
+> - baixar dependências;
+> - gerar os artefatos dentro da pasta target.
+
+gerar o artefato final em:
+> - target/lox-analise-lexica-1.0.0-SNAPSHOT.jar
+> - 
+Se aparecer BUILD SUCCESS, a compilação deu certo.
+
+* Como executar:
+* 1. Executando diretamente via Maven: Se o pom.xml estiver configurado com o plugin exec-maven-plugin, você pode rodar o interpretador assim:
+> mvn exec:java -Dexec.mainClass=Lox
+
+* 2. Executando o JAR gerado: Se o JAR contém um Main-Class definido no manifest, você pode executar com:
+> java -jar target/lox-analise-lexica-1.0.0-SNAPSHOT.jar
+> 
+Caso o Main-Class não esteja configurado, basta rodar:
+> java -cp target/lox-analise-lexica-1.0.0-SNAPSHOT.jar Lox
+
+O Maven irá compilar (se necessário) e executar automaticamente o programa.
 ---
 ## Autora
 
