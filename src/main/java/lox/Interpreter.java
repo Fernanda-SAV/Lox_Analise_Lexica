@@ -1,6 +1,6 @@
 package main.java.lox;
 
-abstract class Interpreter implements Expr.Visitor<Object> {
+ class Interpreter implements Expr.Visitor<Object> {
 
     void interpret(Expr expression) {
         try {
