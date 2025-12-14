@@ -3,7 +3,6 @@ import java.util.ArrayList;
 import java.util.List;
  class Interpreter implements Expr.Visitor<Object>,
          Stmt.Visitor<Void>{
-     private Environment environment = new Environment();
      final Environment globals = new Environment();
      private Environment environment = globals;
      Interpreter() {
@@ -35,6 +34,12 @@ import java.util.List;
          evaluate(stmt.expression);
          return null;
      }
+     @Override
+     public Void visitFunctionStmt(Stmt.Function stmt) {
+         LoxFunction function = new LoxFunction(stmt, environment);
+         environment.define(stmt.name.lexeme, function);
+         return null;
+     }
 
      @Override
      public Void visitIfStmt(Stmt.If stmt) {
@@ -51,6 +56,13 @@ import java.util.List;
          Object value = evaluate(stmt.expression);
          System.out.println(stringify(value));
          return null;
+     }
+     @Override
+     public Void visitReturnStmt(Stmt.Return stmt) {
+         Object value = null;
+         if (stmt.value != null) value = evaluate(stmt.value);
+
+         throw new Return(value);
      }
      @Override
      public Void visitVarStmt(Stmt.Var stmt) {
