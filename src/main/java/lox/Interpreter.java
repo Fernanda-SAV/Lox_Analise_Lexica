@@ -117,6 +117,20 @@ import java.util.Map;
          return evaluate(expr.right);
      }
 
+     @Override
+     public Object visitSetExpr(Expr.Set expr) {
+         Object object = evaluate(expr.object);
+
+         if (!(object instanceof LoxInstance)) {
+             throw new RuntimeError(expr.name,
+                     "Only instances have fields.");
+         }
+
+         Object value = evaluate(expr.value);
+         ((LoxInstance)object).set(expr.name, value);
+         return value;
+     }
+
     @Override
     public Object visitUnaryExpr(Expr.Unary expr) {
         Object right = evaluate(expr.right);
