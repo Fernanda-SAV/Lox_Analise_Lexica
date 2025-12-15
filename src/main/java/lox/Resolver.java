@@ -9,9 +9,17 @@ class Resolver implements Expr.Visitor<Void>, Stmt.Visitor<Void> {
     private final Interpreter interpreter;
     private final Stack<Map<String, Boolean>> scopes = new Stack<>();
 
+    private FunctionType currentFunction = FunctionType.NONE;
+
     Resolver(Interpreter interpreter) {
         this.interpreter = interpreter;
     }
+
+    private enum FunctionType {
+        NONE,
+        FUNCTION
+    }
+
     public Void visitBlockStmt(Stmt.Block stmt) {
         beginScope();
         resolve(stmt.statements);
@@ -29,6 +37,8 @@ class Resolver implements Expr.Visitor<Void>, Stmt.Visitor<Void> {
         define(stmt.name);
 
         resolveFunction(stmt);
+
+        resolveFunction(stmt, FunctionType.FUNCTION);
         return null;
     }
     @Override
@@ -129,7 +139,11 @@ class Resolver implements Expr.Visitor<Void>, Stmt.Visitor<Void> {
             resolve(statement);
         }
     }
-    private void resolveFunction(Stmt.Function function) {
+    private void resolveFunction(
+            Stmt.Function function, FunctionType type) {
+
+        FunctionType enclosingFunction = currentFunction;
+        currentFunction = type;
         beginScope();
         for (Token param : function.params) {
             declare(param);
@@ -137,6 +151,7 @@ class Resolver implements Expr.Visitor<Void>, Stmt.Visitor<Void> {
         }
         resolve(function.body);
         endScope();
+        currentFunction = enclosingFunction;
     }
     private void beginScope() {
         scopes.push(new HashMap<String, Boolean>());
