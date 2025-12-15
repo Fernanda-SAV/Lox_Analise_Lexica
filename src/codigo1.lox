@@ -1,0 +1,32 @@
+fun ePrimo(n) {
+    if (n <= 1) {
+        return false;
+    }
+
+    var i = 2;
+
+    while (i * i <= n) {
+        var j = i;
+
+        var soma = i;
+        while (soma < n) {
+            soma = soma + i;
+        }
+
+        if (soma == n) {
+            return false;
+        }
+
+        i = i + 1;
+    }
+
+    return true;
+}
+
+var numero = 8;
+
+if (ePrimo(numero)) {
+    print "O número é primo.";
+} else {
+    print "O número NÃO é primo.";
+}

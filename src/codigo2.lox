@@ -1,0 +1,54 @@
+class ContaBancaria {
+
+    init(titular, saldoInicial) {
+        this.titular = titular;
+        this.saldo = saldoInicial;
+    }
+
+    depositar(valor) {
+        if (valor <= 0) {
+            print "Valor de depósito inválido.";
+            return;
+        }
+
+        this.saldo = this.saldo + valor;
+    }
+
+    sacar(valor) {
+        if (valor <= 0) {
+            print "Valor de saque inválido.";
+            return;
+        }
+
+        if (valor > this.saldo) {
+            print "=============================";
+            print "Tentativa de saque, mas você não possui saldo Sr.(a) " + this.titular;
+            print "=============================";
+            return;
+        }
+
+        this.saldo = this.saldo - valor;
+    }
+
+    imprimirResumo() {
+        print "=============Resumo de Conta================";
+
+        print "Titular: " + this.titular;
+        print "Saldo:";
+        print this.saldo;
+
+        print "=============================";
+    }
+}
+
+var conta1 = ContaBancaria("Fernanda", 1000);
+var conta2 = ContaBancaria("Izadora", 500);
+
+conta1.depositar(200);
+conta1.sacar(150);
+
+conta2.sacar(600);
+conta2.depositar(300);
+
+conta1.imprimirResumo();
+conta2.imprimirResumo();
