@@ -184,6 +184,16 @@ import java.util.Map;
          executeBlock(stmt.statements, new Environment(environment));
          return null;
      }
+
+     @Override
+     public Void visitClassStmt(Stmt.Class stmt) {
+         environment.define(stmt.name.lexeme, null);
+         LoxClass klass = new LoxClass(stmt.name.lexeme);
+         environment.assign(stmt.name, klass);
+         return null;
+     }
+
+
      void executeBlock(List<Stmt> statements,
                        Environment environment) {
          Environment previous = this.environment;
