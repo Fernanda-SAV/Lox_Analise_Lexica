@@ -1,8 +1,8 @@
-package main.java.lox;
+package lox;
 import java.util.List;
 import java.util.Arrays;
 import java.util.ArrayList;
-import static main.java.lox.TokenType.*;
+import static lox.TokenType.*;
 
 class Parser {
     private final List<Token> tokens;

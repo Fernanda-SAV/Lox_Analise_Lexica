@@ -1,5 +1,4 @@
-package main.java.lox;
-
+package lox;
 import java.util.List;
 
 interface LoxCallable {

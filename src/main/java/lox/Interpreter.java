@@ -1,10 +1,10 @@
-package main.java.lox;
+package lox;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.HashMap;
 import java.util.Map;
 
- class Interpreter implements Expr.Visitor<Object>,
+class Interpreter implements Expr.Visitor<Object>,
          Stmt.Visitor<Void>{
      final Environment globals = new Environment();
      private Environment environment = globals;
@@ -157,7 +157,19 @@ import java.util.Map;
          return lookUpVariable(expr.name, expr);
      }
 
-     private Object lookUpVariable(Token name, Expr expr) {
+    @Override
+    public Object visitGetExpr(Expr.Get expr) {
+        Object object = evaluate(expr.object);
+
+        if (object instanceof LoxInstance) {
+            return ((LoxInstance) object).get(expr.name);
+        }
+
+        throw new RuntimeError(expr.name,
+                "Only instances have properties.");
+    }
+
+    private Object lookUpVariable(Token name, Expr expr) {
          Integer distance = locals.get(expr);
          if (distance != null) {
              return environment.getAt(distance, name.lexeme);

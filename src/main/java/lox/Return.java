@@ -1,5 +1,4 @@
-package main.java.lox;
-
+package lox;
 class Return extends RuntimeException {
     final Object value;
 

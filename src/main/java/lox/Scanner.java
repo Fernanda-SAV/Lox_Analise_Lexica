@@ -1,7 +1,6 @@
 //package com.craftinginterpreters.lox;
 
-package main.java.lox;
-
+package lox;
 
 import java.util.ArrayList;
 import java.util.HashMap;

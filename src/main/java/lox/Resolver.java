@@ -1,4 +1,4 @@
-package main.java.lox;
+package lox;
 
 import java.util.HashMap;
 import java.util.List;
@@ -58,8 +58,6 @@ class Resolver implements Expr.Visitor<Void>, Stmt.Visitor<Void> {
     public Void visitFunctionStmt(Stmt.Function stmt) {
         declare(stmt.name);
         define(stmt.name);
-
-        resolveFunction(stmt);
 
         resolveFunction(stmt, FunctionType.FUNCTION);
         return null;
@@ -129,17 +127,6 @@ class Resolver implements Expr.Visitor<Void>, Stmt.Visitor<Void> {
         }
 
         return null;
-    }
-
-    @Override
-    public Object visitGetExpr(Expr.Get expr) {
-        Object object = evaluate(expr.object);
-        if (object instanceof LoxInstance) {
-            return ((LoxInstance) object).get(expr.name);
-        }
-
-        throw new RuntimeError(expr.name,
-                "Only instances have properties.");
     }
 
     @Override
